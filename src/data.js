@@ -1,7 +1,11 @@
 export const records = [
     {
-        title: 'The Beatles',
+        artist: 'The Beatles',
     }, {
-        title: 'Dido',
+        artist: 'Dido',
+    }, {
+        artist: 'Imagine Dragons',
+    }, {
+        artist: 'Frank Sinatra',
     }
 ]

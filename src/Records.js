@@ -11,7 +11,7 @@ export default class Records extends Component {
         return (
             <View>
                 <ScrollView>
-                    {records.map((record, index) => <Text>{record.title}</Text>)}
+                    {records.map((record, index) => <Text key={index}>{record.artist}</Text>)}
                 </ScrollView>
             </View>
         )
