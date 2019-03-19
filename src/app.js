@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { 
-    Navigator,
-} from 'react-native';
+// import NavigationExperimental from 'react-native-deprecated-custom-components';
+import {Navigator} from 'react-native-deprecated-custom-components'
 import Records from './Records';
 
 const RouteMapper = (route, navigator) => {
@@ -13,7 +12,7 @@ const RouteMapper = (route, navigator) => {
 export default class App extends Component {
     render() {
         return (
-            <Navigator 
+            <Navigator
                 initialRoute={{ name: 'records' }}
                 configureScene={(route, routeStack) => Navigator.SceneConfigs.FloatFromBottom}
                 renderScene={RouteMapper}
