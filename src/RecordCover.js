@@ -12,7 +12,7 @@ import {
 import { defaultStyles } from './styles';
 
 const { width, height } = Dimensions.get('window');
-const cols = 3, rows = 3;
+const cols = 2, rows = 3;
 
 export default class RecordCover extends Component {
     debugger;
