@@ -1,4 +1,5 @@
-import React, { Component, Proptypes } from 'react';
+import React, { Component, } from 'react'; // PropTypes
+import { PropTypes } from 'prop-types';
 import {
     Dimensions, 
     Image,
@@ -8,12 +9,14 @@ import {
     View,
 } from 'react-native';
 
-import { defaultStyle } from './styles';
+import { defaultStyles } from './styles';
 
 const { width, height } = Dimensions.get('window');
 const cols = 3, rows = 3;
 
 export default class RecordCover extends Component {
+    debugger;
+
     static propTypes = {
         record: PropTypes.object.isRequired,
         onOpen: PropTypes.func.isRequired
@@ -25,9 +28,9 @@ export default class RecordCover extends Component {
         return (
             <TouchableOpacity style={styles.container} onPress={() => onOpen(record) } >
                 <View style={styles.imageContainer}>
-                    <Image source={{uri: poster}} style={styles.image} />
+                    <Image source={{uri: cover}} style={styles.image} />
                 </View>
-                <Text style={styles.text} numberOfLines={1}>{title}</Text>
+                <Text style={styles.text} numberOfLines={1}>{artist}</Text>
             </TouchableOpacity>
         )
     }
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         ...StyleSheet.absoluteFillObject,
     }, 
-    title: {
+    artist: {
         ...defaultStyles.text,
         fontSize: 14,
         marginTop: 4,

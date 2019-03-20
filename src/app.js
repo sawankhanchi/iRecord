@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import NavigationExperimental from 'react-native-deprecated-custom-components';
 import {Navigator} from 'react-native-deprecated-custom-components'
 import Records from './Records';
 
