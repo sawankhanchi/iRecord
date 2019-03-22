@@ -27,7 +27,7 @@ export default class Records extends Component {
         if (this.props.records) {
             listOfRecords = this.props.records.map(function(record, index) {
                 return (
-                    <View>
+                    <View key={index}>
                         <Record key={index} record={record}/>
                     </View>
                 )

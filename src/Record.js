@@ -6,11 +6,9 @@ import {
     Text,
     StyleSheet,
     View,
-    Button,
     Modal, 
     TouchableOpacity,
     TouchableHighlight,
-    Alert,
 } from 'react-native';
 import { defaultStyles } from './styles';
 
@@ -39,7 +37,7 @@ export default class Record extends Component {
                     <View style={styles.imageContainer}>
                         <Image source={{uri: record.cover}} style={styles.image} />
                     </View>
-                    <Text style={styles.text} numberOfLines={1}>{record.artist}</Text>
+                    <Text style={styles.text}>{record.artist}</Text>
                 </TouchableOpacity>
 
                 <Modal
@@ -52,9 +50,10 @@ export default class Record extends Component {
                     <View style={{marginTop: 50}}>
                         <View>
                         <Text>{record.artist}</Text>
+                        
                         <TouchableHighlight
                             onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
+                                this.setModalVisible(!this.state.modalVisible);
                             }}>
                             <Text>Hide Modal</Text>
                         </TouchableHighlight>
@@ -70,8 +69,8 @@ const styles = StyleSheet.create({
     container: {
         marginLeft: 10,
         marginBottom: 10,
-        height: (height - 20 - 20) / rows - 10,
-        width: (width - 10) / cols - 10,
+        height: (height - 50 - 50) / rows - 10,
+        width: (width - 40) / cols - 10,
     },
     imageContainer: {
         flex: 1,
