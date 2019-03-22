@@ -1,26 +1,53 @@
 import React, { Component } from 'react';
 import { 
     ScrollView, 
-    StyleSheet,
     View,
+    StyleSheet,
+    Text,
+    RefreshControl,
 } from 'react-native';
-import RecordCover from './RecordCover';
-import { records } from './data';
+import Record from './Record';
+import { connect } from 'react-redux';
+
+@connect(
+    state => ({
+        records: state.records,
+        loading: state.loading,
+    }),
+    dispatch => ({
+        refresh: () => dispatch({type: 'GET_RECORD_DATA'})
+    }),
+)
 
 export default class Records extends Component {
     render() {
+        const {loading, refresh } = this.props;
+
+        let {listOfRecords} = {};
+        if (this.props.records) {
+            listOfRecords = this.props.records.map(function(record, index) {
+                return (
+                    <View key={index}>
+                        <Record key={index} record={record}/>
+                    </View>
+                )
+            })
+        }
+
         return (
             <View style={styles.container}>
                 <ScrollView
                     contentContainerStyle={styles.scrollContent}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading}
+                            onRefresh={refresh}
+                        />
+                    }
                 >
-                    {records.map((record, index) => <RecordCover 
-                        record={record}
-                        onOpen={this.openRecord}
-                        key={index}
-                    />)}
+               {listOfRecords}    
                 </ScrollView>
             </View>
         )
