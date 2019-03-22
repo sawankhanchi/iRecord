@@ -55,7 +55,10 @@ export default class Records extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 100,
-        paddingLeft: 100,
+        paddingTop: 40,
+    }, 
+    scrollContent: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     }
 })

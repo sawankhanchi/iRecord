@@ -4,12 +4,18 @@ import {
     Dimensions, 
     Image,
     Text,
+    StyleSheet,
     View,
     Button,
     Modal, 
+    TouchableOpacity,
     TouchableHighlight,
     Alert,
 } from 'react-native';
+import { defaultStyles } from './styles';
+
+const { width, height } = Dimensions.get('window');
+const cols = 2, rows = 3;
 
 export default class Record extends Component {
     state = {
@@ -24,20 +30,17 @@ export default class Record extends Component {
         this.setState({modalVisible: visible});
     }
 
-
     render() {
         const { record } = this.props;
 
         return (
             <View>
-                <Text>{record.artist}</Text>
-
-                <TouchableHighlight
-                    onPress={() => {
-                        this.setModalVisible(true);
-                    }}>
-                    <Text>See More</Text>
-                </TouchableHighlight>
+                <TouchableOpacity style={styles.container} onPress={() => this.setModalVisible(true) } >
+                    <View style={styles.imageContainer}>
+                        <Image source={{uri: record.cover}} style={styles.image} />
+                    </View>
+                    <Text style={styles.text} numberOfLines={1}>{record.artist}</Text>
+                </TouchableOpacity>
 
                 <Modal
                     animationType="slide"
@@ -48,7 +51,7 @@ export default class Record extends Component {
                     }}>
                     <View style={{marginTop: 50}}>
                         <View>
-                        <Text>{record.name}</Text>
+                        <Text>{record.artist}</Text>
                         <TouchableHighlight
                             onPress={() => {
                             this.setModalVisible(!this.state.modalVisible);
@@ -62,3 +65,30 @@ export default class Record extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        marginLeft: 10,
+        marginBottom: 10,
+        height: (height - 20 - 20) / rows - 10,
+        width: (width - 10) / cols - 10,
+    },
+    imageContainer: {
+        flex: 1,
+    }, 
+    image: {
+        borderRadius: 10,
+        ...StyleSheet.absoluteFillObject,
+    }, 
+    artist: {
+        ...defaultStyles.text,
+        fontSize: 14,
+        marginTop: 4,
+    }, 
+    genre: {
+        ...defaultStyles.text,
+        color: '#BBBBBB',
+        fontSize: 12,
+        lineHeight: 14,
+    }
+});

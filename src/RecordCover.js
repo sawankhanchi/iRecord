@@ -15,15 +15,13 @@ const { width, height } = Dimensions.get('window');
 const cols = 2, rows = 3;
 
 export default class RecordCover extends Component {
-    debugger;
-
     static propTypes = {
         record: PropTypes.object.isRequired,
         onOpen: PropTypes.func.isRequired
     }
 
     render() {
-        const { record, record: {artist, cover}, onOpen } = this.props;
+        const { record, record: {artist, cover} } = this.props;
 
         return (
             <TouchableOpacity style={styles.container} onPress={() => onOpen(record) } >
