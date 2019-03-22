@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { 
     ScrollView, 
-    StyleSheet,
     View,
-    ActivityIndicator,
+    StyleSheet,
+    Text,
     RefreshControl,
 } from 'react-native';
+import Record from './Record';
 import { connect } from 'react-redux';
-import RecordCover from './RecordCover';
-import { records } from './data';
 
 @connect(
     state => ({
@@ -22,20 +21,32 @@ import { records } from './data';
 
 export default class Records extends Component {
     render() {
-        const { records, loading, refresh } = this.props;
-        
+        const {loading, refresh } = this.props;
+
+        let {listOfRecords} = {};
+        if (this.props.records) {
+            listOfRecords = this.props.records.map(function(record, index) {
+                return (
+                    <View>
+                        <Record key={index} record={record}/>
+                    </View>
+                )
+            })
+        }
+
         return (
             <View style={styles.container}>
                 <ScrollView
-                    contentContainerStyle={styles.scrollContent}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading}
+                            onRefresh={refresh}
+                        />
+                    }
                 >
-                    {records.map((record, index) => <RecordCover 
-                        record={record}
-                        onOpen={this.openRecord}
-                        key={index}
-                    />)}
+               {listOfRecords}    
                 </ScrollView>
             </View>
         )
@@ -44,10 +55,7 @@ export default class Records extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 40,
-    }, 
-    scrollContent: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        paddingTop: 100,
+        paddingLeft: 100,
     }
 })

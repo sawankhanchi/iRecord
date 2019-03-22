@@ -1,8 +1,7 @@
 import { Platform } from 'react-native';
 
-const API = Platform.OS === 'android'
-    ? 'http://10.0.3.2:3000/v1'
-    : 'http://localhost:3000/v1';
+const axios = require('axios');
+const API = 'http://127.0.0.1:3000/v1';
 
 export const apiMiddleware = store => next => action => {
     next(action);
@@ -11,18 +10,14 @@ export const apiMiddleware = store => next => action => {
         case 'GET_RECORD_DATA':
             store.dispatch({type: 'GET_RECORD_DATA_LOADING'});
 
-            fetch(`${API}/records.json`)
-                .then(response => response.json())
+            axios.get(`${API}/records.json`)
+                .then(function(response) {
+                    return response.data.records
+                })
                 .then(data => next({
                     type: 'GET_RECORD_DATA_RECEIVED',
-                    data
-                }))
-                .catch(error => next({
-                    type: 'GET_RECORD_DATA_ERROR',
-                    error
-                }));
-                break;
-                
+                    data,
+                }))  
         default:
                 break;
 
@@ -38,8 +33,8 @@ export const reducer = (state = {records: [], loading: true}, action) => {
             }
         case 'GET_RECORD_DATA_RECEIVED':
             return {
-                loading: false, 
-                records: action.data.records
+                records: action.data,
+                loading: false,
             }
         case 'GET_RECORD_DATA_ERROR':
             return state;
