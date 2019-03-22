@@ -67,7 +67,7 @@ export default class Record extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginLeft: 10,
+        marginLeft: 20,
         marginBottom: 10,
         height: (height - 50 - 50) / rows - 10,
         width: (width - 40) / cols - 10,

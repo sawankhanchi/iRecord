@@ -37,6 +37,7 @@ export default class Records extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView
+                    contentContainerStyle={styles.scrollContent}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     refreshControl={
