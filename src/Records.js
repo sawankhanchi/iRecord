@@ -7,6 +7,7 @@ import {
     RefreshControl,
 } from 'react-native';
 import Record from './Record';
+import LoadingScreen from './LoadingScreen';
 import { connect } from 'react-redux';
 
 @connect(
@@ -32,6 +33,10 @@ export default class Records extends Component {
                     </View>
                 )
             })
+        } else {
+            return (
+                <LoadingScreen />
+            )
         }
 
         return (
