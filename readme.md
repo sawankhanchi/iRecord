@@ -3,7 +3,9 @@
 
 Users can upload their record collection to keep track of what vinyl they have.
 
-[appimage](app.png)
+![appimage](app.png)
+![appImage2](app1.png)
+![appImage3](app2.png)
 
 ### Setup
 After cloning, run ```npm install```.
