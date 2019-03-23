@@ -14,6 +14,7 @@ import LoadingScreen from './LoadingScreen';
 import { connect } from 'react-redux';
 import { apiMiddleware, reducer } from './redux';
 import { createStore, applyMiddleware } from 'redux';
+const axios = require('axios');
 
 const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 
@@ -30,7 +31,7 @@ const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 export default class Records extends Component {
     state = {
         modalVisible: false,
-        text: '',
+        artist: '',
         image: '',
     }
         
@@ -39,9 +40,20 @@ export default class Records extends Component {
     }
 
     submitInput() {
-        debugger;
-        if (this.state.text != '' && this.state.image != '') {
-            debugger;
+        if (this.state.artist != '' && this.state.image != '') {
+            const obj = {
+                artist: this.state.artist,
+                cover: this.state.image,
+              };
+              axios.post('http://127.0.0.1:3000/v1/create', obj)
+                  .then(res => console.log(res.data));
+
+              debugger;
+              
+              this.setState({
+                artist: '',
+                cover: '',
+              })
         }
     }
 
@@ -87,8 +99,8 @@ export default class Records extends Component {
                             <Text>Artist</Text>
                                 <TextInput
                                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                                    onChangeText={(text) => this.setState({text})}
-                                    value={this.state.text}
+                                    onChangeText={(artist) => this.setState({artist})}
+                                    value={this.state.artist}
                                 />
                                 <Text>Record Cover URL</Text>
                                 <TextInput
