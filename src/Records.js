@@ -12,6 +12,10 @@ import {
 import Record from './Record';
 import LoadingScreen from './LoadingScreen';
 import { connect } from 'react-redux';
+import { apiMiddleware, reducer } from './redux';
+import { createStore, applyMiddleware } from 'redux';
+
+const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 
 @connect(
     state => ({
@@ -34,7 +38,12 @@ export default class Records extends Component {
         this.setState({modalVisible: visible});
     }
 
-
+    submitInput() {
+        debugger;
+        if (this.state.text != '' && this.state.image != '') {
+            debugger;
+        }
+    }
 
     render() {
         const {loading, refresh } = this.props;
