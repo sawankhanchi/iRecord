@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
-import Record from './models/record';
+const mongoose = require('mongoose');
+
+let Record = require('./models/record');
 
 const records = [
     {
@@ -17,7 +18,7 @@ const records = [
     }
 ]
 
-mongoose.connect('mongodb://localhost/records');
+mongoose.connect('mongodb://127.0.0.1:27017/records');
 
 records.map(data => {
     const record = new Record(data);

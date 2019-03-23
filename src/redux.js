@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 
 const axios = require('axios');
-const API = 'http://127.0.0.1:3000/v1';
+const API = 'http://localhost:4000/records';
 
 export const apiMiddleware = store => next => action => {
     next(action);
@@ -10,9 +10,9 @@ export const apiMiddleware = store => next => action => {
         case 'GET_RECORD_DATA':
             store.dispatch({type: 'GET_RECORD_DATA_LOADING'});
 
-            axios.get(`${API}/records.json`)
+            axios.get(API)
                 .then(function(response) {
-                    return response.data.records
+                    return response.data
                 })
                 .then(data => next({
                     type: 'GET_RECORD_DATA_RECEIVED',

@@ -8,3 +8,12 @@ export const index = (req, res, next) => {
         }))}
     ))
 }
+
+export const create = (req, res, next) => {
+    let record = new Record({
+        artist: req.body.artist,
+        cover: req.body.cover,
+    });
+
+    record.save();
+}
