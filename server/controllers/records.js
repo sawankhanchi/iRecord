@@ -12,16 +12,8 @@ export const index = (req, res, next) => {
 export const create = (req, res, next) => {
     let record = new Record({
         artist: req.body.artist,
-        cover: req.body.cover
+        cover: req.body.cover,
     });
 
-    debugger;
-
-    record.save(function(err) {
-        if (err) {
-            return next(err);
-        }
-
-        res.send('record saved successfully');
-    })
+    record.save();
 }

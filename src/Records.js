@@ -69,11 +69,14 @@ export default class Records extends Component {
                     </View>
                 )
             })
-        } else {
-            return (
-                <LoadingScreen />
-            )
         }
+        
+        // Example of loading screen
+        // else {
+        //     return (
+        //         <LoadingScreen />
+        //     )
+        // }
 
         return (
             <View style={styles.container}>
