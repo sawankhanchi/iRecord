@@ -5,6 +5,7 @@ import {
     Modal, 
     View,
     StyleSheet,
+    TextInput,
     Text,
     RefreshControl,
 } from 'react-native';
@@ -24,12 +25,16 @@ import { connect } from 'react-redux';
 
 export default class Records extends Component {
     state = {
-        modalVisible: false
+        modalVisible: false,
+        text: '',
+        image: '',
     }
         
     setModalVisible(visible) {
         this.setState({modalVisible: visible});
     }
+
+
 
     render() {
         const {loading, refresh } = this.props;
@@ -51,7 +56,7 @@ export default class Records extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.buttonContainer}>
+                <View style={styles.addRecordContainer}>
                     <Button
                         onPress={() => {
                             this.setModalVisible(!this.state.modalVisible);
@@ -69,16 +74,37 @@ export default class Records extends Component {
                             console.log('Modal closed')
                         }}>
                         <View style={{marginTop: 50}}>
-                            <View>
-                                <Text>HI</Text>
-                                <Button
-                                    onPress={() => {
-                                        this.setModalVisible(!this.state.modalVisible);
-                                    }}
-                                    title="Close"
-                                    color="#841584"
-                                    accessibilityLabel="Close Modal"
+                            <View style={styles.addRecordModal}>
+                            <Text>Artist</Text>
+                                <TextInput
+                                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                                    onChangeText={(text) => this.setState({text})}
+                                    value={this.state.text}
+                                />
+                                <Text>Record Cover URL</Text>
+                                <TextInput
+                                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                                    onChangeText={(image) => this.setState({image})}
+                                    value={this.state.image}
+                                />
+
+                                <View style={styles.buttonContainer}>
+                                    <Button 
+                                        onPress={() => {this.submitInput()}}
+                                        title="Submit"
+                                        color="blue"
+                                        accessibilityLabel="Submit record"
                                     />
+
+                                    <Button
+                                        onPress={() => {
+                                            this.setModalVisible(!this.state.modalVisible);
+                                        }}
+                                        title="Close"
+                                        color="#841584"
+                                        accessibilityLabel="Close Modal"
+                                        />
+                                </View>
                                 </View>
                             </View>
                         </Modal>
@@ -105,11 +131,20 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 40,
     }, 
+    addRecordModal: {
+        width: 320,
+        marginLeft: 30,
+    },
     scrollContent: {
         flexDirection: 'row',
         flexWrap: 'wrap',
     }, 
     buttonContainer: {
+        flexDirection: 'row',
+        marginLeft: 80,
+        width: 120,
+    },
+    addRecordContainer: {
         backgroundColor: 'black',
         marginLeft: 230,
         marginBottom: 12,
