@@ -1,11 +1,13 @@
-import mongoose, {Schema} from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var recordSchema = new Schema({
+let Record = new Schema({
     artist: {
-        type: String,
-        unique: true,
-    }, 
-    cover: String,
-})
+        type: String
+    },
+    cover: {
+        type: String
+    }
+});
 
-export default mongoose.model('record', recordSchema);
+module.exports = mongoose.model('Record', Record);

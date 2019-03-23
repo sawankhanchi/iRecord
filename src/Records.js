@@ -45,14 +45,14 @@ export default class Records extends Component {
                 artist: this.state.artist,
                 cover: this.state.image,
               };
-              axios.post('http://127.0.0.1:3000/v1/create', obj)
+              axios.post('http://localhost:4000/records/add', obj)
                   .then(res => console.log(res.data));
 
               debugger;
               
               this.setState({
                 artist: '',
-                cover: '',
+                image: '',
               })
         }
     }
