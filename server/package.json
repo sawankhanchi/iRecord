@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "populate": "node populate.js",
+    "start": "nodemon server"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {

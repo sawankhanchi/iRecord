@@ -1,7 +1,6 @@
 import { Platform } from 'react-native';
 
 const axios = require('axios');
-// const API = 'http://127.0.0.1:3000/records';
 const API = 'http://localhost:4000/records';
 
 export const apiMiddleware = store => next => action => {
