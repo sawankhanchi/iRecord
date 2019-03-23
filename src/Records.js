@@ -47,8 +47,6 @@ export default class Records extends Component {
               };
               axios.post('http://localhost:4000/records/add', obj)
                   .then(res => console.log(res.data));
-
-              debugger;
               
               this.setState({
                 artist: '',
