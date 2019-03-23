@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { 
-    ScrollView, 
+    Button,
+    ScrollView,
+    Modal, 
     View,
     StyleSheet,
     Text,
@@ -21,6 +23,14 @@ import { connect } from 'react-redux';
 )
 
 export default class Records extends Component {
+    state = {
+        modalVisible: false
+    }
+        
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
     render() {
         const {loading, refresh } = this.props;
 
@@ -41,6 +51,38 @@ export default class Records extends Component {
 
         return (
             <View style={styles.container}>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={() => {
+                            this.setModalVisible(!this.state.modalVisible);
+                        }}
+                        title="Add Record"
+                        color="white"
+                        accessibilityLabel="Add Record"
+                    />
+
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {
+                            console.log('Modal closed')
+                        }}>
+                        <View style={{marginTop: 50}}>
+                            <View>
+                                <Text>HI</Text>
+                                <Button
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible);
+                                    }}
+                                    title="Close"
+                                    color="#841584"
+                                    accessibilityLabel="Close Modal"
+                                    />
+                                </View>
+                            </View>
+                        </Modal>
+                    </View>
                 <ScrollView
                     contentContainerStyle={styles.scrollContent}
                     showsHorizontalScrollIndicator={false}
@@ -66,5 +108,12 @@ const styles = StyleSheet.create({
     scrollContent: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+    }, 
+    buttonContainer: {
+        backgroundColor: 'black',
+        marginLeft: 230,
+        marginBottom: 12,
+        width: 120,
+        marginTop: 10,
     }
 })
