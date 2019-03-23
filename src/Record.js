@@ -1,6 +1,7 @@
 import React, { Component, } from 'react';
 import { PropTypes } from 'prop-types';
 import {
+    Button,
     Dimensions, 
     Image,
     Text,
@@ -49,16 +50,20 @@ export default class Record extends Component {
                     }}>
                     <View style={{marginTop: 50}}>
                         <View>
-                        <Text>{record.artist}</Text>
-                        
-                        <TouchableHighlight
-                            onPress={() => {
-                                this.setModalVisible(!this.state.modalVisible);
-                            }}>
-                            <Text>Hide Modal</Text>
-                        </TouchableHighlight>
+                            <View style={styles.modalContainer}>
+                                <Image source={{uri: record.cover}} style={styles.modalImage}/>
+                            </View>
+                            <Text style={styles.ModalText}>{record.artist}</Text>
+                            <Button
+                                onPress={() => {
+                                    this.setModalVisible(!this.state.modalVisible);
+                                }}
+                                title="Close"
+                                color="#841584"
+                                accessibilityLabel="Close Modal"
+                                />
+                            </View>
                         </View>
-                    </View>
                     </Modal>
             </View>
         )
@@ -72,9 +77,24 @@ const styles = StyleSheet.create({
         height: (height - 50 - 50) / rows - 10,
         width: (width - 40) / cols - 10,
     },
+    modalContainer: {
+        marginLeft: 35,
+        marginTop: 10,
+        height: 300,
+        width: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     imageContainer: {
         flex: 1,
     }, 
+    modalImage: {
+        borderRadius: 10,
+        ...StyleSheet.absoluteFillObject,
+    },
+    ModalText: {
+        marginLeft: 35,
+    },
     image: {
         borderRadius: 10,
         ...StyleSheet.absoluteFillObject,
