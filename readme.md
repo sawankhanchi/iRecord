@@ -12,6 +12,9 @@ After cloning, run ```npm install```.
 
 Backend:
 ``` cd server```
+``` sudo mkdir -p /data/db ```
+``` sudo chmod 777 /data/db ```
+``` mongod& ```
 ```nodemon server```
 
 Frontend:
